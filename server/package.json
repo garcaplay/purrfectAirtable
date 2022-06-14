@@ -1,0 +1,17 @@
+{
+  "name": "purrairtable",
+  "version": "1.0.0",
+  "description": "Application in node+react for purrAirtable project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SGC",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.11.4",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}
