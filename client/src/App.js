@@ -11,7 +11,11 @@ function App() {
         setOrders(data);
       });
   }, []);
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      {orders.length > 0 ? <h1>GOT DATA FROM API</h1> : <h1>NOT DATA</h1>}
+    </div>
+  );
 }
 
 export default App;
