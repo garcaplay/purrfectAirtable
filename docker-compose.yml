@@ -7,7 +7,8 @@ services:
       dockerfile: Dockerfile
       context: "./server"
     volumes:
-      - ./server:/app   
+      - ./server:/app  
+    restart: on-failure 
 
   client:
     build:
