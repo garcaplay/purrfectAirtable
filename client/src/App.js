@@ -1,4 +1,3 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import getData from "./services/services";
 import StatsList from "./views/statsList";
@@ -37,7 +36,7 @@ function App() {
         </h1>
       </header>
       <main className="dashboard_main">
-        <div className="stats">
+        <div id="stats_container">
           {
             <StatsList
               revenueTotal={revenueTotal}
@@ -47,7 +46,8 @@ function App() {
             />
           }
         </div>
-        <div>
+        <div id="last_orders_container">
+          <h2 className="last_orders_title">Recently placed orders</h2>
           {lastOrders.length > 0 ? (
             <LastOrdersList lastOrders={lastOrders} />
           ) : (
