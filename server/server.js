@@ -8,8 +8,8 @@ const app = express();
 const port = 5500;
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
 
-// Get last 5 orders
-const getLast5OrdersFromAirtable = async () => {
+// Get last n orders
+const getLastOrdersFromAirtable = async (number = 6) => {
   console.log("Going to call airtable");
   const records = [];
   let recordsRetrieved = [];
@@ -17,7 +17,7 @@ const getLast5OrdersFromAirtable = async () => {
     recordsRetrieved = await base("Orders")
       .select({
         view: "Grid view",
-        maxRecords: 5,
+        maxRecords: number,
         sort: [{ field: "order_placed", direction: "desc" }],
       })
       .all();
@@ -31,18 +31,18 @@ const getLast5OrdersFromAirtable = async () => {
   return records;
 };
 
-app.get("/orders_new", async (req, res) => {
-  console.log("User called to get last 5 orders!");
+app.get("/orders_new/:number", async (req, res) => {
+  const { number } = req.params;
+  console.log(`User called to get last ${number} orders!`);
   let records = [];
   try {
-    records = await getLast5OrdersFromAirtable();
+    records = await getLastOrdersFromAirtable(parseInt(number));
   } catch (err) {
     console.log(`Error received from AirTable: ${err}`);
 
     res.status(500).send(err);
   }
-  console.log(`Response received from AirTable:`);
-  console.log(records);
+  console.log(`Response received from AirTable: ${records}`);
   res.status(200).json(records);
 });
 
@@ -101,7 +101,7 @@ const getNumberOfOrderWithGivenStatus = async (status) => {
     throw new Error(`Error response received from Airtable API: ${err}`);
   }
 
-  ordersNo = recordsRetrieved.length;
+  // ordersNo = recordsRetrieved.length;
   return ordersNo;
 };
 
@@ -139,7 +139,7 @@ const getNumberOfOrdersInGivenMonth = async (date) => {
     throw new Error(`Error response received from Airtable API: ${err}`);
   }
 
-  ordersNo = recordsRetrieved.length;
+  // ordersNo = recordsRetrieved.length;
   return ordersNo;
 };
 

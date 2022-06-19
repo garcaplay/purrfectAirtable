@@ -10,7 +10,7 @@ function App() {
   const [currentMonthOrdersNo, setCurrentMonthOrdersNo] = useState([]);
   const [totalOrdersNo, setTotalOrdersNo] = useState([]);
   useEffect(() => {
-    getData("/orders_new").then((data) => {
+    getData(`/orders_new/${6}`).then((data) => {
       console.log(data);
       setLastOrders(data);
     });
