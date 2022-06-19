@@ -138,6 +138,16 @@ h2 {
   gap: 12px;
 }
 
+/* error state */
+.error_bar.error {
+  background-color: #ffadad;
+  height: 30px;
+  width: calc(100vw - 15px);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /* tablet */
 @media screen and (min-width: 768px) {
   /* last orders and stats styles */
